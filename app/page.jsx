@@ -30,7 +30,8 @@ export default function Home() {
     let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
-    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && firstCourse.current === coursesListElement.current && coursesListElement.current.scrollTop === 0){
+    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && firstCourse.current === currentElement.current){
+      console.log('stinky')
 
       // document.body.style.overflow = 'scroll'
       document.body.style.overflow = 'scroll'
