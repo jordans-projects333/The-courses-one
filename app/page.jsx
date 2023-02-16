@@ -16,7 +16,7 @@ export default function Home() {
     snapTime.current = true
     setTimeout(() => {
       snapTime.current = false
-    }, 200)
+    }, 1000)
   }
   const swipeMove = (e) => {
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
@@ -29,12 +29,12 @@ export default function Home() {
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
     if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && currentElement.current.closest('section') === coursesListElement.current && coursesListElement.current.scrollTop === 0){
-      overviewElement.current.scrollIntoView({behavior: 'smooth'})
+      overviewElement.current.scrollIntoView()
+      // overviewElement.current.scrollIntoView({behavior: 'smooth'})
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && currentElement.current === overviewElement.current){
-      coursesListElement.current.scrollIntoView({behavior: 'smooth'})
+      // coursesListElement.current.scrollIntoView({behavior: 'smooth'})
+      coursesListElement.current.scrollIntoView()
     }
-      // serviceSnap.current.scrollIntoView({behavior: 'smooth'})
-      // serviceSnap.current.scrollIntoView()
   }
   return (
     <>
@@ -58,7 +58,7 @@ export default function Home() {
           <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start">
 
           </div>
-          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start">
+          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start" onTouchStart={() => overviewElement.current.scrollIntoView()}>
 
           </div>
         </section>
