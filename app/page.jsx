@@ -38,15 +38,15 @@ export default function Home() {
       overviewElement.current.scrollIntoView({behavior: 'smooth'})
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && currentElement.current === overviewElement.current){
       // document.body.style.overflow = 'hidden'
-      // coursesListElement.current.style.overflow = 'scroll'
+      coursesListElement.current.style.overflow = 'scroll'
       coursesListElement.current.scrollIntoView({behavior: 'smooth'})
     }
   }
   useEffect(() => {
     coursesListElement.current.onscroll = () => {
-      if(coursesListElement.current.scrollTop < 30 && trigger.current){
+      if(coursesListElement.current.scrollTop < window.innerHeight - 30 && trigger.current){
         coursesListElement.current.style.overflow = 'hidden'
-        firstCourse.current.style.backgroundColor = 'red'
+        // firstCourse.current.style.backgroundColor = 'red'
       }
     }
     // const options = {
