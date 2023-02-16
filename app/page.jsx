@@ -37,7 +37,7 @@ export default function Home() {
       // overviewElement.current.scrollIntoView({behavior: 'smooth'})
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && currentElement.current === overviewElement.current){
       document.body.style.overflow = 'hidden'
-      coursesListElement.current.style.overflow = 'scroll'
+      coursesListElement.current.style.overflow = 'hidden'
       // coursesListElement.current.scrollIntoView()
       coursesListElement.current.scrollIntoView({behavior: 'smooth'})
     }
@@ -50,11 +50,9 @@ export default function Home() {
         </section>
         <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
           <div id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start" onTouchMove={() => {
-            console.log(trigger.current)
-            if(trigger.current){
-              coursesListElement.current.style.overflow = 'hidden'
-              document.body.style.overflow = 'scroll'
-            }
+              coursesListElement.current.style.overflow = 'scroll'
+              // document.body.style.overflow = 'scroll'
+            
           }}>
 
           </div>
