@@ -29,11 +29,11 @@ export default function Home() {
         }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-          if(entry.isIntersecting){
+          if(entry.isIntersecting && trigger.current == true){
             coursesListElement.current.style.overflow = 'hidden'
               // window.addEventListener('scroll', servicePageScroll)
           }else{
-            coursesListElement.current.style.overflow = 'scroll'
+            // coursesListElement.current.style.overflow = 'scroll'
           }
       })
     }, options)
@@ -54,7 +54,7 @@ export default function Home() {
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && firstCourse.current === currentElement.current){
       secondCourse.current.scrollIntoView()
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && overviewElement.current === currentElement.current){
-      document.body.style.overflow = 'hidden'
+      // document.body.style.overflow = 'hidden'
       coursesListElement.current.scrollIntoView({behavior: 'smooth'})
       // coursesListElement.current.scrollIntoView()
     }
@@ -78,7 +78,7 @@ export default function Home() {
           <div id='course_4' className="h-[100lvh] w-full bg-purple-400 snap-start">
 
           </div>
-          <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start">
+          <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start" onTouchStart={() => trigger.current = true}>
 
           </div>
           <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start">
