@@ -30,31 +30,34 @@ export default function Home() {
     let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
-    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && currentElement.current.closest('section') === coursesListElement.current && coursesListElement.current.scrollTop === 0){
+    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && currentElement.current === firstCourse.current){
 
       // document.body.style.overflow = 'scroll'
       // coursesListElement.current.style.overflow = 'hidden'
       // overviewElement.current.scrollIntoView()
-      // overviewElement.current.scrollIntoView({behavior: 'smooth'})
+      overviewElement.current.scrollIntoView({behavior: 'smooth'})
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && currentElement.current === overviewElement.current){
       // document.body.style.overflow = 'hidden'
       // coursesListElement.current.style.overflow = 'scroll'
-      coursesListElement.current.scrollIntoView()
+      coursesListElement.current.scrollIntoView({behavior: 'smooth'})
     }
   }
   useEffect(() => {
-    const options = {
-            root: null, // default, use viewport
-            rootMargin: '-99% 0px -1% 0%'
-          }
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if(entry.isIntersecting && trigger.current == true){
-                    coursesListElement.current.style.overflow = 'hidden'
-                }
-            })
-        }, options)
-        observer.observe(firstCourse.current)
+    coursesListElement.onscroll = () => {
+      if(coursesListElement.current.scrollTop < 30 && trigger.current)coursesListElement.current.style.overflow = 'hidden'
+    }
+    // const options = {
+    //         root: null, // default, use viewport
+    //         rootMargin: '-99% 0px -1% 0%'
+    //       }
+    //     const observer = new IntersectionObserver((entries) => {
+    //         entries.forEach((entry) => {
+    //             if(entry.isIntersecting && trigger.current == true){
+    //                 coursesListElement.current.style.overflow = 'hidden'
+    //             }
+    //         })
+    //     }, options)
+    //     observer.observe(firstCourse.current)
   },[firstCourse.current])
   return (
     <>
