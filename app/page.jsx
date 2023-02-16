@@ -49,7 +49,7 @@ export default function Home() {
 
         </section>
         <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
-          <div id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start" onTouchStart={() => {
+          <div id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start" onTouchEnd={() => {
             coursesListElement.current.style.overflow = 'hidden'
           }}>
 
