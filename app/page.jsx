@@ -86,7 +86,7 @@ export default function Home() {
           <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start" onTouchStart={() => {trigger.current = true}}>
 
           </div>
-          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start">
+          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start" onTouchStart={() => {coursesListElement.current.style.overflow = 'hidden'; document.body.style.overflow = 'hidden'}}>
 
           </div>
         </section>
