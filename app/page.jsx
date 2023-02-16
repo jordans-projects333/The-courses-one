@@ -5,10 +5,14 @@ export default function Home() {
   let originalPosition = useRef()
   let currentPosition = useRef()
   let snapTime = useRef(true)
+  let currentElement = useRef(null)
+  let overviewElement = useRef(null)
+  let coursesListElement = useRef(null)
   const swipeStart = (e) => {
+    console.log(coursesListElement.current.scrollTop)
+    currentElement.current = e.target 
     originalPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
-    console.log(originalPosition.current)
     snapTime.current = true
     setTimeout(() => {
       snapTime.current = false
@@ -20,30 +24,25 @@ export default function Home() {
   const swipeEnd = () => {
     if(currentPosition.current[0] === originalPosition.current[0] && currentPosition.current[1] === originalPosition.current[1])return
     if(snapTime.current != true)return
+    console.log(currentElement.current, overviewElement.current)
     let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
-    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15){
-      console.log('wow')
-    }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15){
-      console.log('down')
+    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && currentElement.current.closest('section') === coursesListElement.current && coursesListElement.current.scrollTop === 0){
+      overviewElement.current.scrollIntoView({behavior: 'smooth'})
+    }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && currentElement.current === overviewElement.current){
+      coursesListElement.current.scrollIntoView({behavior: 'smooth'})
     }
       // serviceSnap.current.scrollIntoView({behavior: 'smooth'})
       // serviceSnap.current.scrollIntoView()
   }
-  const homeSwipeUp = () => {
-    console.log('swipeUp')
-  }
-  const homeSwipeDown = () => {
-    console.log('swipeDown')
-  }
   return (
     <>
-      <main>
-        <section id='introduction' className="h-[100svh] w-full bg-green-200" onTouchStart={e => swipeStart(e)} onTouchMove={e => swipeMove(e)} onTouchEnd={swipeEnd}>
+      <main onTouchStart={e => swipeStart(e)} onTouchMove={e => swipeMove(e)} onTouchEnd={swipeEnd}>
+        <section ref={overviewElement} id='introduction' className="h-[100svh] w-full bg-green-200">
 
         </section>
-        <section id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
+        <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
           <div id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
 
           </div>
