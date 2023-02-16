@@ -39,11 +39,11 @@ export default function Home() {
   }
   return (
     <>
-      <main className=" snap-y snap-mandatory h-[100svh] overflow-y-scroll">
-        <section id='introduction' className="h-[100svh] w-full bg-green-200 snap-start" onTouchStart={e => swipeStart(e)} onTouchMove={e => swipeMove(e)} onTouchEnd={swipeEnd}>
+      <main>
+        <section id='introduction' className="h-[100svh] w-full bg-green-200" onTouchStart={e => swipeStart(e)} onTouchMove={e => swipeMove(e)} onTouchEnd={swipeEnd}>
 
         </section>
-        <section id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-start snap-y snap-mandatory">
+        <section id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
           <div id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
 
           </div>
