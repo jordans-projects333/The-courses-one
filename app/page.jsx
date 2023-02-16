@@ -9,9 +9,7 @@ export default function Home() {
   let overviewElement = useRef(null)
   let coursesListElement = useRef(null)
   let trigger = useRef(false)
-  let firstCourse = useRef(null)
-  let uuh = useRef(null)
-  let secondCourse = useRef(null)
+  let firstCourse = useRef(false)
   const swipeStart = (e) => {
     console.log(coursesListElement.current.scrollTop)
     currentElement.current = e.target 
@@ -22,24 +20,6 @@ export default function Home() {
       snapTime.current = false
     }, 1000)
   }
-  useEffect(() => {
-    const options = {
-          root: null, // default, use viewport
-          rootMargin: '-99% 0px -1% 0%'
-        }
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-          if(entry.isIntersecting && trigger.current == true){
-            coursesListElement.current.style.overflow = 'hidden'
-            console.log('problem')
-              // window.addEventListener('scroll', servicePageScroll)
-          }else{
-            // coursesListElement.current.style.overflow = 'scroll'
-          }
-      })
-    }, options)
-  observer.observe(firstCourse.current)
-  },[firstCourse])
   const swipeMove = (e) => {
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
   }
@@ -50,27 +30,43 @@ export default function Home() {
     let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
-    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && firstCourse.current === currentElement.current){
-      overviewElement.current.scrollIntoView({behavior: 'smooth'})
-    }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && firstCourse.current === currentElement.current){
-      // secondCourse.current.scrollIntoView()
-    }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && overviewElement.current === currentElement.current){
+    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && currentElement.current.closest('section') === coursesListElement.current && coursesListElement.current.scrollTop === 0){
+
+      // document.body.style.overflow = 'scroll'
+      // coursesListElement.current.style.overflow = 'hidden'
+      // overviewElement.current.scrollIntoView()
+      // overviewElement.current.scrollIntoView({behavior: 'smooth'})
+    }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && currentElement.current === overviewElement.current){
       // document.body.style.overflow = 'hidden'
-      coursesListElement.current.scrollIntoView({behavior: 'smooth'})
-      // coursesListElement.current.scrollIntoView()
+      // coursesListElement.current.style.overflow = 'scroll'
+      coursesListElement.current.scrollIntoView()
     }
   }
+  useEffect(() => {
+    const options = {
+            root: null, // default, use viewport
+            rootMargin: '-99% 0px -1% 0%'
+          }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if(entry.isIntersecting && trigger.current == true){
+                    coursesListElement.current.style.overflow = 'hidden'
+                }
+            })
+        }, options)
+        observer.observe(firstCourse.current)
+  },[firstCourse.current])
   return (
     <>
       <main onTouchStart={e => swipeStart(e)} onTouchMove={e => swipeMove(e)} onTouchEnd={swipeEnd}>
         <section ref={overviewElement} id='introduction' className="h-[100svh] w-full bg-green-200">
 
         </section>
-        <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 snap-y snap-mandatory relative">
+        <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
           <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
 
           </div>
-          <div ref={secondCourse} id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start">
+          <div id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start">
 
           </div>
           <div id='course_3' className="h-[100lvh] w-full bg-purple-300 snap-start">
@@ -79,7 +75,7 @@ export default function Home() {
           <div id='course_4' className="h-[100lvh] w-full bg-purple-400 snap-start">
 
           </div>
-          <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start" onTouchStart={() => trigger.current = true}>
+          <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start" onTouchStart={() => {trigger.current = true}}>
 
           </div>
           <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start">
