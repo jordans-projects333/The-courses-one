@@ -10,6 +10,7 @@ export default function Home() {
   let coursesListElement = useRef(null)
   let trigger = useRef(false)
   let firstCourse = useRef(null)
+  let uuh = useRef(null)
   let secondCourse = useRef(null)
   const swipeStart = (e) => {
     console.log(coursesListElement.current.scrollTop)
@@ -40,10 +41,10 @@ export default function Home() {
       // overviewElement.current.scrollIntoView({behavior: 'smooth'})
       // overviewElement.current.scrollIntoView()
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && overviewElement.current === currentElement.current){
-      // document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden'
       // coursesListElement.current.style.overflow = 'hidden'
       // // coursesListElement.current.scrollIntoView()
-      // coursesListElement.current.scrollIntoView({behavior: 'smooth'})
+      coursesListElement.current.scrollIntoView({behavior: 'smooth'})
     }
   }
   const test = () => {
@@ -72,17 +73,16 @@ export default function Home() {
         <section ref={overviewElement} id='introduction' className="h-[100svh] w-full bg-green-200">
 
         </section>
-        <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
-          <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start" onTouchEnd={() => test()}>
+        <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-hidden snap-y snap-mandatory relative">
+          <div ref={uuh} className="absolute top-0 w-full" onTouchMove={(e) => {
+            console.log('jj')
+            currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
+            uuh.current.style.transform = `translateY(${(currentPosition.current[1] - originalPosition.current[1])}px)`
+          }}>
+          <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
 
           </div>
-          <div ref={secondCourse} id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start" onTouchEnd={() => {
-            
-            setTimeout(() => {
-              coursesListElement.current.style.overflow = 'hidden'
-            }, 1000)
-          }
-          }>
+          <div ref={secondCourse} id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start">
 
           </div>
           <div id='course_3' className="h-[100lvh] w-full bg-purple-300 snap-start">
@@ -96,6 +96,7 @@ export default function Home() {
           </div>
           <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start">
 
+          </div>
           </div>
         </section>
       </main>
