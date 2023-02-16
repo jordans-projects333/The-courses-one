@@ -73,10 +73,10 @@ export default function Home() {
 
         </section>
         <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
-          <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start" onTouchEnd={() => test()} onTouchStart={() => coursesListElement.current.style.overflow = 'hidden'}>
+          <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start" onTouchEnd={() => test()}>
 
           </div>
-          <div ref={secondCourse} id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start">
+          <div ref={secondCourse} id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start" onTouchEnd={() => coursesListElement.current.style.overflow = 'hidden'}>
 
           </div>
           <div id='course_3' className="h-[100lvh] w-full bg-purple-300 snap-start">
