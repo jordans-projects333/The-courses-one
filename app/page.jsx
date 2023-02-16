@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 
 export default function Home() {
   let originalPosition = useRef()
@@ -22,6 +22,23 @@ export default function Home() {
       snapTime.current = false
     }, 1000)
   }
+  useEffect(() => {
+    const options = {
+          root: null, // default, use viewport
+          rootMargin: '-99% 0px -1% 0%'
+        }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+          if(entry.isIntersecting){
+            coursesListElement.current.style.overflow = 'hidden'
+              // window.addEventListener('scroll', servicePageScroll)
+          }else{
+            coursesListElement.current.style.overflow = 'scroll'
+          }
+      })
+    }, options)
+  observer.observe(firstCourse.current)
+  },[firstCourse])
   const swipeMove = (e) => {
     currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
   }
@@ -33,38 +50,13 @@ export default function Home() {
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
     if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && firstCourse.current === currentElement.current){
-      // console.log('stinky')
-
-      // document.body.style.overflow = 'scroll'
-      // document.body.style.overflow = 'scroll'
-      // coursesListElement.current.style.overflow = 'hidden'
-      // overviewElement.current.scrollIntoView({behavior: 'smooth'})
-      // overviewElement.current.scrollIntoView()
+      overviewElement.current.scrollIntoView()
+    }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && firstCourse.current === currentElement.current){
+      secondCourse.current.scrollIntoView()
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && overviewElement.current === currentElement.current){
       document.body.style.overflow = 'hidden'
-      // coursesListElement.current.style.overflow = 'hidden'
-      // // coursesListElement.current.scrollIntoView()
-      coursesListElement.current.scrollIntoView({behavior: 'smooth'})
-    }
-  }
-  const test = () => {
-    if(currentPosition.current[0] === originalPosition.current[0] && currentPosition.current[1] === originalPosition.current[1])return
-    if(snapTime.current != true)return
-    console.log(currentElement.current, overviewElement.current)
-    let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])
-    let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
-    let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
-    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15){
-      // Up
-      document.body.style.overflow = 'scroll'
-      coursesListElement.current.style.overflow = 'hidden'
-      // overviewElement.current.scrollIntoView({behavior: 'smooth'})
-      overviewElement.current.scrollIntoView({behavior: 'smooth'})
-    }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15){
-      document.body.style.overflow = 'hidden'
-      coursesListElement.current.style.overflow = 'scroll'
-      // coursesListElement.current.scrollIntoView()
-      secondCourse.current.scrollIntoView({behavior: 'smooth'})
+      // coursesListElement.current.scrollIntoView({behavior: 'smooth'})
+      coursesListElement.current.scrollIntoView()
     }
   }
   return (
@@ -74,11 +66,6 @@ export default function Home() {
 
         </section>
         <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-hidden snap-y snap-mandatory relative">
-          <div ref={uuh} className="absolute top-0 w-full" onTouchMove={(e) => {
-            console.log('jj')
-            currentPosition.current = [e.touches[0].clientX, e.touches[0].clientY]
-            uuh.current.style.transform = `translateY(${(currentPosition.current[1] - originalPosition.current[1])}px)`
-          }}>
           <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
 
           </div>
@@ -96,7 +83,6 @@ export default function Home() {
           </div>
           <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start">
 
-          </div>
           </div>
         </section>
       </main>
