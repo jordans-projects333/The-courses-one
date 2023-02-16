@@ -36,11 +36,11 @@ export default function Home() {
       // document.body.style.overflow = 'scroll'
       document.body.style.overflow = 'scroll'
       coursesListElement.current.style.overflow = 'hidden'
-      window.scrollTo(0, 0)
+      overviewElement.current.scrollIntoView({behavior: 'smooth'})
       // overviewElement.current.scrollIntoView()
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && overviewElement.current === currentElement.current){
       document.body.style.overflow = 'hidden'
-      coursesListElement.current.style.overflow = 'scroll'
+      coursesListElement.current.style.overflow = 'hidden'
       // coursesListElement.current.scrollIntoView()
       coursesListElement.current.scrollIntoView({behavior: 'smooth'})
     }
@@ -52,10 +52,16 @@ export default function Home() {
 
         </section>
         <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
-          <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
+          <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start" onTouchStart={() => coursesListElement.current.style.overflow = 'hidden'} onTouchMove={() => coursesListElement.current.style.overflow = 'scroll'}>
 
           </div>
-          <div id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start">
+          <div id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start" onTouchEnd={() => {
+            if(trigger.current == true){
+              coursesListElement.current.style.overflow = 'hidden'
+            }else{
+              trigger.current = true
+            }
+          }}>
 
           </div>
           <div id='course_3' className="h-[100lvh] w-full bg-purple-300 snap-start">
