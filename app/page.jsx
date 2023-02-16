@@ -50,13 +50,13 @@ export default function Home() {
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
     if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && firstCourse.current === currentElement.current){
-      overviewElement.current.scrollIntoView()
+      overviewElement.current.scrollIntoView({behavior: 'smooth'})
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && firstCourse.current === currentElement.current){
       secondCourse.current.scrollIntoView()
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && overviewElement.current === currentElement.current){
       document.body.style.overflow = 'hidden'
-      // coursesListElement.current.scrollIntoView({behavior: 'smooth'})
-      coursesListElement.current.scrollIntoView()
+      coursesListElement.current.scrollIntoView({behavior: 'smooth'})
+      // coursesListElement.current.scrollIntoView()
     }
   }
   return (
