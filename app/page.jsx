@@ -36,6 +36,7 @@ export default function Home() {
       // coursesListElement.current.style.overflow = 'hidden'
       // overviewElement.current.scrollIntoView()
       overviewElement.current.scrollIntoView({behavior: 'smooth'})
+      trigger.current = false
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && currentElement.current === overviewElement.current){
       // document.body.style.overflow = 'hidden'
       coursesListElement.current.style.overflow = 'scroll'
