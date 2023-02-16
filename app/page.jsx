@@ -76,7 +76,13 @@ export default function Home() {
           <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start" onTouchEnd={() => test()}>
 
           </div>
-          <div ref={secondCourse} id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start" onTouchEnd={() => coursesListElement.current.style.overflow = 'hidden'}>
+          <div ref={secondCourse} id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start" onTouchEnd={() => {
+            
+            setTimeout(() => {
+              coursesListElement.current.style.overflow = 'hidden'
+            }, 1000)
+          }
+          }>
 
           </div>
           <div id='course_3' className="h-[100lvh] w-full bg-purple-300 snap-start">
