@@ -58,7 +58,7 @@ export default function Home() {
           <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start">
 
           </div>
-          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start" onTouchStart={() => overviewElement.current.scrollIntoView()}>
+          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start" onTouchEnd={() => window.scroll( 0, window.scrollY )}>
 
           </div>
         </section>
