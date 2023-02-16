@@ -52,7 +52,7 @@ export default function Home() {
     if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && firstCourse.current === currentElement.current){
       overviewElement.current.scrollIntoView({behavior: 'smooth'})
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && firstCourse.current === currentElement.current){
-      secondCourse.current.scrollIntoView()
+      // secondCourse.current.scrollIntoView()
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && overviewElement.current === currentElement.current){
       // document.body.style.overflow = 'hidden'
       coursesListElement.current.scrollIntoView({behavior: 'smooth'})
