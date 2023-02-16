@@ -31,6 +31,7 @@ export default function Home() {
       entries.forEach((entry) => {
           if(entry.isIntersecting && trigger.current == true){
             coursesListElement.current.style.overflow = 'hidden'
+            console.log('problem')
               // window.addEventListener('scroll', servicePageScroll)
           }else{
             // coursesListElement.current.style.overflow = 'scroll'
@@ -65,7 +66,7 @@ export default function Home() {
         <section ref={overviewElement} id='introduction' className="h-[100svh] w-full bg-green-200">
 
         </section>
-        <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-hidden snap-y snap-mandatory relative">
+        <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 snap-y snap-mandatory relative">
           <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
 
           </div>
