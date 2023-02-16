@@ -30,11 +30,16 @@ export default function Home() {
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
     if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && currentElement.current.closest('section') === coursesListElement.current && coursesListElement.current.scrollTop === 0){
+
+      document.body.style.overflow = 'scroll'
+      coursesListElement.current.style.overflow = 'hidden'
       // overviewElement.current.scrollIntoView()
       overviewElement.current.scrollIntoView({behavior: 'smooth'})
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && currentElement.current === overviewElement.current){
-      coursesListElement.current.scrollIntoView({behavior: 'smooth'})
+      document.body.style.overflow = 'hidden'
+      coursesListElement.current.style.overflow = 'scroll'
       // coursesListElement.current.scrollIntoView()
+      coursesListElement.current.scrollIntoView({behavior: 'smooth'})
     }
   }
   return (
@@ -58,10 +63,10 @@ export default function Home() {
           <div id='course_4' className="h-[100lvh] w-full bg-purple-400 snap-start">
 
           </div>
-          <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start" onTouchStart={() => trigger.current = true}>
+          <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start">
 
           </div>
-          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start" onTouchStart={() => coursesListElement.current.style.overflow = 'hidden'}>
+          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start">
 
           </div>
         </section>
