@@ -9,6 +9,7 @@ export default function Home() {
   let overviewElement = useRef(null)
   let coursesListElement = useRef(null)
   let trigger = useRef(false)
+  let firstCourse = useRef(null)
   const swipeStart = (e) => {
     console.log(coursesListElement.current.scrollTop)
     currentElement.current = e.target 
@@ -29,12 +30,12 @@ export default function Home() {
     let lengthX = Math.abs(currentPosition.current[0] - originalPosition.current[0])
     let lengthY = Math.abs(currentPosition.current[1] - originalPosition.current[1])
     let theta = Math.atan(lengthY/lengthX) * (180/Math.PI)
-    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && currentElement.current.closest('section') === coursesListElement.current && coursesListElement.current.scrollTop === 0){
+    if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] > 0 && lengthY > 15 && firstCourse.current === coursesListElement.current && coursesListElement.current.scrollTop === 0){
 
       // document.body.style.overflow = 'scroll'
-      // coursesListElement.current.style.overflow = 'hidden'
-      // overviewElement.current.scrollIntoView()
-      // overviewElement.current.scrollIntoView({behavior: 'smooth'})
+      document.body.style.overflow = 'scroll'
+      coursesListElement.current.style.overflow = 'hidden'
+      overviewElement.current.scrollIntoView({behavior: 'smooth'})
     }else if(theta > 30 && currentPosition.current[1] - originalPosition.current[1] < 0 && lengthY > 15 && currentElement.current === overviewElement.current){
       document.body.style.overflow = 'hidden'
       coursesListElement.current.style.overflow = 'scroll'
@@ -49,7 +50,7 @@ export default function Home() {
 
         </section>
         <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
-          <div id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
+          <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
 
           </div>
           <div id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start">
@@ -64,12 +65,7 @@ export default function Home() {
           <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start">
 
           </div>
-          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start" onTouchStart={() => {
-            document.body.style.overflow = 'scroll'
-            coursesListElement.current.style.overflow = 'hidden'
-            overviewElement.current.scrollIntoView({behavior: 'smooth'})
-
-          }}>
+          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start">
 
           </div>
         </section>
