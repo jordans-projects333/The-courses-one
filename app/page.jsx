@@ -46,6 +46,7 @@ export default function Home() {
     coursesListElement.current.onscroll = () => {
       if(coursesListElement.current.scrollTop < window.innerHeight - 30 && trigger.current){
         coursesListElement.current.style.overflow = 'hidden'
+        firstCourse.current.scrollIntoView({behavior: 'smooth'})
         // firstCourse.current.style.backgroundColor = 'red'
       }
     }
