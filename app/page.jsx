@@ -8,6 +8,7 @@ export default function Home() {
   let currentElement = useRef(null)
   let overviewElement = useRef(null)
   let coursesListElement = useRef(null)
+  let trigger = useRef(false)
   const swipeStart = (e) => {
     console.log(coursesListElement.current.scrollTop)
     currentElement.current = e.target 
@@ -43,7 +44,9 @@ export default function Home() {
 
         </section>
         <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
-          <div id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start">
+          <div id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start" onTouchStart={() => {
+            if(trigger.current == true)coursesListElement.current.style.overflow = 'hidden'
+          }}>
 
           </div>
           <div id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start">
@@ -55,10 +58,10 @@ export default function Home() {
           <div id='course_4' className="h-[100lvh] w-full bg-purple-400 snap-start">
 
           </div>
-          <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start">
+          <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start" onTouchStart={() => trigger.current = true}>
 
           </div>
-          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start" onTouchEnd={() => coursesListElement.current.style.overflow = 'hidden'}>
+          <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start" onTouchStart={() => coursesListElement.current.style.overflow = 'hidden'}>
 
           </div>
         </section>
