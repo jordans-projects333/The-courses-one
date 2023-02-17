@@ -6,6 +6,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      "quicksand": "var(--quicksand-font)",
+    },
     extend: {},
   },
   plugins: [],

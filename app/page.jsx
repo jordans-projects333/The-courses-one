@@ -95,6 +95,14 @@ export default function Home() {
   }
   return (
     <>
+      <header className="fixed w-full top-0 z-50 pt-4 flex pl-4">
+        <div className="flex flex-col gap-[6px]">
+          <div className="h-[2px] w-[1.5rem] bg-black"></div>
+          <div className="h-[2px] w-[1rem] bg-black"></div>
+          <div className="h-[2px] w-[1rem] bg-black"></div>
+        </div>
+        <h3 className="ml-auto">Semi Courses</h3>
+      </header>
       <main onTouchStart={e => swipeStart(e)} onTouchMove={e => swipeMove(e)} onTouchEnd={swipeEnd}>
         <section ref={overviewElement} id='introduction' className="h-[100svh] w-full bg-green-200 relative">
     
@@ -102,29 +110,34 @@ export default function Home() {
         <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory overflow-x-hidden">
           {/* ////////////////////////////////////////////////////////////////////////////// */}
           <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start relative" onClick={() => selected()}>
-            <div ref={course1__wrapper2} className="h-full w-[0%] absolute top-0 right-0 duration-1000">
-              <Image ref={course1__image2} fill alt="brb" src={cloudImage2} className='object-cover duration-1000'/>
+            <div ref={course1__wrapper2} className="h-full w-[0%] absolute top-0 right-0 duration-[1s]">
+              <Image ref={course1__image2} fill alt="brb" src={cloudImage2} className='object-cover duration-[1s] border-l-4 border-white'/>
             </div>
-            <div ref={course1__wrapper1} className="h-full w-full absolute top-0 duration-1000">
-              <Image ref={course1__image1} fill alt="brb" src={cloudImage} className='object-cover scale-110 duration-1000'/>
+            <div ref={course1__wrapper1} className="h-full w-full absolute top-0 duration-[1s]">
+              <Image ref={course1__image1} fill alt="brb" src={cloudImage} className='object-cover scale-110 duration-[1s] border-r-4 border-white'/>
             </div>
-            <h3 className="absolute top-[30%] left-[50%] translate-x-[-50%] text-white text-3xl pointer-events-none">Cloud Computing</h3>
+            <h3 className="absolute top-[20%] text-center left-[50%] translate-x-[-50%] text-white text-5xl pointer-events-none font-quicksand">Cloud Computing</h3>
           </div>
           {/* //////////////////////////////////////////////// */}
           <div id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start relative">
             <Image fill alt="brb" src={mathsImage} className='object-cover'/>
+            <h3 className="absolute top-[20%] text-center left-[50%] translate-x-[-50%] text-white text-5xl pointer-events-none font-quicksand">Backend Development</h3>
           </div>
           <div id='course_3' className="h-[100lvh] w-full bg-purple-300 snap-start relative">
           <Image fill alt="brb" src={frontEndImage} className='object-cover'/>
+          <h3 className="absolute top-[20%] text-center left-[50%] translate-x-[-50%] text-white text-5xl pointer-events-none font-quicksand">Frontend Development</h3>
           </div>
           <div id='course_4' className="h-[100lvh] w-full bg-purple-400 snap-start relative">
           <Image fill alt="brb" src={securityImage} className='object-cover'/>
+          <h3 className="absolute top-[20%] text-center left-[50%] translate-x-[-50%] text-white text-5xl pointer-events-none font-quicksand">Cyber Security</h3>
           </div>
           <div id='course_5' className="h-[100lvh] w-full bg-purple-500 snap-start relative" onTouchStart={() => {trigger.current = true}}>
           <Image fill alt="brb" src={appImage} className='object-cover'/>
+          <h3 className="absolute top-[20%] text-center left-[50%] translate-x-[-50%] text-white text-5xl pointer-events-none font-quicksand">App Development</h3>
           </div>
           <div id='course_6' className="h-[100lvh] w-full bg-purple-600 snap-start relative">
           <Image fill alt="brb" src={rustImage} className='object-cover'/>
+          <h3 className="absolute top-[20%] text-center left-[50%] translate-x-[-50%] text-white text-5xl pointer-events-none font-quicksand">Rust Course</h3>
           </div>
         </section>
       </main>
