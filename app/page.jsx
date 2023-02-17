@@ -8,6 +8,7 @@ import frontEndImage from '../images/frontEnd.jpg'
 import securityImage from '../images/security.jpg'
 import appImage from '../images/app.jpg'
 import rustImage from '../images/rust.jpg'
+import Overview from "./components/Overview"
 
 export default function Home() {
   let originalPosition = useRef()
@@ -95,18 +96,19 @@ export default function Home() {
   }
   return (
     <>
-      <header className="fixed w-full top-0 z-50 pt-4 flex pl-4">
+      <header className="fixed w-full top-0 z-50 py-2 flex pl-4 shadow-md items-center justify-center bg-white">
         <div className="flex flex-col gap-[6px]">
           <div className="h-[2px] w-[1.5rem] bg-black"></div>
           <div className="h-[2px] w-[1rem] bg-black"></div>
           <div className="h-[2px] w-[1rem] bg-black"></div>
         </div>
-        <h3 className="ml-auto">Semi Courses</h3>
+        <div className="mr-4 ml-auto flex items-center gap-1">
+          <h3 className="text-xl">Curve Learning</h3>
+          <svg className="h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M153.6 29.9l16-21.3C173.6 3.2 180 0 186.7 0C198.4 0 208 9.6 208 21.3V43.5c0 13.1 5.4 25.7 14.9 34.7L307.6 159C356.4 205.6 384 270.2 384 337.7C384 434 306 512 209.7 512H192C86 512 0 426 0 320v-3.8c0-48.8 19.4-95.6 53.9-130.1l3.5-3.5c4.2-4.2 10-6.6 16-6.6C85.9 176 96 186.1 96 198.6V288c0 35.3 28.7 64 64 64s64-28.7 64-64v-3.9c0-18-7.2-35.3-19.9-48l-38.6-38.6c-24-24-37.5-56.7-37.5-90.7c0-27.7 9-54.8 25.6-76.9z"/></svg>
+        </div>
       </header>
       <main onTouchStart={e => swipeStart(e)} onTouchMove={e => swipeMove(e)} onTouchEnd={swipeEnd}>
-        <section ref={overviewElement} id='introduction' className="h-[100svh] w-full bg-green-200 relative">
-    
-        </section>
+        <Overview overviewElement={overviewElement}/>
         <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory overflow-x-hidden">
           {/* ////////////////////////////////////////////////////////////////////////////// */}
           <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start relative" onClick={() => selected()}>
@@ -117,6 +119,7 @@ export default function Home() {
               <Image ref={course1__image1} fill alt="brb" src={cloudImage} className='object-cover scale-110 duration-[1s] border-r-4 border-white'/>
             </div>
             <h3 className="absolute top-[20%] text-center left-[50%] translate-x-[-50%] text-white text-5xl pointer-events-none font-quicksand">Cloud Computing</h3>
+            <div className="absolute top-0 w-full h-full bg-black/5"></div>
           </div>
           {/* //////////////////////////////////////////////// */}
           <div id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start relative">
