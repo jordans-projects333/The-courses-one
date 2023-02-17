@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react"
 import Image from "next/image"
 import mathsImage from '../images/mathss.jpg'
 import cloudImage from '../images/cloudd.jpg'
+import cloudImage2 from '../images/cloudd2.jpg'
 import frontEndImage from '../images/frontEnd.jpg'
 import securityImage from '../images/security.jpg'
 import appImage from '../images/app.jpg'
@@ -17,6 +18,11 @@ export default function Home() {
   let coursesListElement = useRef(null)
   let trigger = useRef(false)
   let firstCourse = useRef(false)
+  let course1__image1 = useRef(null)
+  let course1__image2 = useRef(null)
+  let course1__wrapper1 = useRef(null)
+  let course1__wrapper2 = useRef(null)
+  let trans = useRef(true)
   const swipeStart = (e) => {
     console.log(coursesListElement.current.scrollTop)
     currentElement.current = e.target 
@@ -71,17 +77,40 @@ export default function Home() {
     //     }, options)
     //     observer.observe(firstCourse.current)
   },[firstCourse.current])
+  const selected = () => {
+    if(trans.current === true){
+      console.log('eek', course1__wrapper1.current.style)
+      course1__wrapper1.current.style.width = 0
+      course1__wrapper2.current.style.width = '100%'
+      course1__image1.current.style.scale = 1
+      course1__image2.current.style.scale = 1.1
+      trans.current = false
+    }else{
+      course1__wrapper1.current.style.width = '100%'
+      course1__wrapper2.current.style.width = 0
+      course1__image1.current.style.scale = 1.1
+      course1__image2.current.style.scale = 1
+      trans.current = true
+    }
+  }
   return (
     <>
       <main onTouchStart={e => swipeStart(e)} onTouchMove={e => swipeMove(e)} onTouchEnd={swipeEnd}>
         <section ref={overviewElement} id='introduction' className="h-[100svh] w-full bg-green-200 relative">
     
         </section>
-        <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory">
-          <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start relative">
-            <Image fill alt="brb" src={cloudImage} className='object-cover'/>
-            <h3 className="absolute top-[30%] left-[50%] translate-x-[-50%] text-white text-3xl">Cloud Computing</h3>
+        <section ref={coursesListElement} id='courses' className="h-[100lvh] w-full bg-green-300 overflow-y-scroll snap-y snap-mandatory overflow-x-hidden">
+          {/* ////////////////////////////////////////////////////////////////////////////// */}
+          <div ref={firstCourse} id='course_1' className="h-[100lvh] w-full bg-purple-100 snap-start relative" onClick={() => selected()}>
+            <div ref={course1__wrapper2} className="h-full w-[0%] absolute top-0 right-0 duration-1000">
+              <Image ref={course1__image2} fill alt="brb" src={cloudImage2} className='object-cover duration-1000'/>
+            </div>
+            <div ref={course1__wrapper1} className="h-full w-full absolute top-0 duration-1000">
+              <Image ref={course1__image1} fill alt="brb" src={cloudImage} className='object-cover scale-110 duration-1000'/>
+            </div>
+            <h3 className="absolute top-[30%] left-[50%] translate-x-[-50%] text-white text-3xl pointer-events-none">Cloud Computing</h3>
           </div>
+          {/* //////////////////////////////////////////////// */}
           <div id='course_2' className="h-[100lvh] w-full bg-purple-200 snap-start relative">
             <Image fill alt="brb" src={mathsImage} className='object-cover'/>
           </div>
